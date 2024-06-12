@@ -50,7 +50,12 @@ public class BookServiceImpl implements BookService {
     public BookResponse updateBook(Long id, BookRequest bookRequest) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException(id));
-        return BookMapper.INSTANCE.bookToBookResponse(book);
+        book.setTitle(bookRequest.getTitle());
+        book.setAuthor(bookRequest.getAuthor());
+        book.setIsbn(bookRequest.getIsbn());
+        book.setAvailable(bookRequest.isAvailable());
+        Book updatedBook = bookRepository.save(book);
+        return BookMapper.INSTANCE.bookToBookResponse(updatedBook);
     }
 
     @Override
