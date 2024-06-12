@@ -28,5 +28,5 @@ public class Book {
     @Column(nullable = false, unique = true)
     private String isbn;
 
-    private boolean isAvailable;
+    private boolean available;
 }

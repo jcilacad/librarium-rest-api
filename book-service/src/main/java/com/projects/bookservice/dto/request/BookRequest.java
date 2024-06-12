@@ -19,5 +19,5 @@ public class BookRequest {
     @Pattern(regexp = "^(97(8|9))?\\d{9}(\\d|X)$", message = "Invalid ISBN")
     @NotEmpty(message = "ISBN must not be empty")
     private String isbn;
-    private boolean isAvailable;
+    private boolean available;
 }
