@@ -9,6 +9,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/member-service/src/main/java/com/projects/memberservice/dto/request/MemberRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/member-service/src/main/java/com/projects/memberservice/dto/request/MemberRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/member-service/src/main/java/com/projects/memberservice/dto/response/MemberResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/member-service/src/main/java/com/projects/memberservice/dto/response/MemberResponse.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,13 +50,14 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/johnc/OneDrive - Pamantasan ng Lungsod ng Maynila/Projects/librarium-rest-api/member-service",
+    "last_opened_file_path": "C:/Users/johnc/OneDrive - Pamantasan ng Lungsod ng Maynila/Projects/librarium-rest-api/loan-service",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.ConfigServerApplication">
+  <component name="RunManager" selected="Application.LoanServiceApplication">
     <configuration name="BookServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.projects.bookservice.BookServiceApplication" />
       <module name="book-service" />
@@ -74,6 +77,19 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.projects.configserver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoanServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.projects.loanservice.LoanServiceApplication" />
+      <module name="loan-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.projects.loanservice.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -109,9 +125,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.LoanServiceApplication" />
+        <item itemvalue="Application.BookServiceApplication" />
         <item itemvalue="Application.ConfigServerApplication" />
         <item itemvalue="Application.ServiceRegistryApplication" />
-        <item itemvalue="Application.BookServiceApplication" />
       </list>
     </recent_temporary>
   </component>

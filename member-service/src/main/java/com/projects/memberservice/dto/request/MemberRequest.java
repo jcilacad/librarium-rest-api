@@ -12,11 +12,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberRequest {
-    @NotEmpty(message = "First should not be empty")
+    @NotEmpty(message = "First name should not be empty")
     private String firstName;
-    @NotEmpty(message = "First should not be empty")
+    @NotEmpty(message = "Last name should not be empty")
     private String lastName;
-    @Email
-    @NotEmpty(message = "First should not be empty")
+    @Email(message = "Invalid email format")
+    @NotEmpty(message = "Email should not be empty")
     private String email;
 }
