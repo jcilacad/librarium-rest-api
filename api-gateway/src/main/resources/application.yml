@@ -1,6 +1,26 @@
 spring:
   application:
     name: api-gateway
+  cloud:
+    gateway:
+      # Book Service Routes
+      routes[0]:
+        id: BOOK-SERVICE
+        uri: lb://BOOK-SERVICE
+        predicates[0]: Path=/api/v1/books/**
+      # Member Service Routes
+      routes[1]:
+        id: MEMBER-SERVICE
+        uri: lb://MEMBER-SERVICE
+        predicates[0]: Path=/api/v1/members/**
+      # Loan Service Routes
+      routes[2]:
+        id: LOAN-SERVICE
+        uri: lb://LOAN-SERVICE
+        predicates[0]: Path=/api/v1/loans/**
+  output:
+    ansi:
+      enabled: always
 server:
   port: 9191
 eureka:

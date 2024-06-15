@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(value = "book-service", url = "http://localhost:8080/api/v1/books")
+@FeignClient(name = "BOOK-SERVICE", path = "/api/v1/books")
 public interface BookServiceClient {
 
     @GetMapping("/{id}")

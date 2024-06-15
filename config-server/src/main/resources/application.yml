@@ -12,6 +12,9 @@ spring:
           default-label: main
           username: ${GITHUB_USERNAME}
           password: ${GITHUB_TOKEN}
+  output:
+    ansi:
+      enabled: always
 server:
   port: 8888
 eureka:
