@@ -1,29 +1,6 @@
 spring:
   application:
     name: loan-service
-  datasource:
-    url: jdbc:postgresql://localhost:5432/loans_db
-    username: postgres
-    password: password
-  jpa:
-    hibernate:
-      ddl-auto: update
-  cloud:
-    config:
-        enabled: false
-  output:
-    ansi:
-      enabled: always
-server:
-  port: 8083
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
+  config:
+    import: optional:configserver:http://localhost:8888
 
