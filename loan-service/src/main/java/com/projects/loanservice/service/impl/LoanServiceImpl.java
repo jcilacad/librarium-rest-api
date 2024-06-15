@@ -6,6 +6,7 @@ import com.projects.loanservice.dto.request.LoanRequest;
 import com.projects.loanservice.dto.response.BookResponse;
 import com.projects.loanservice.dto.response.LoanResponse;
 import com.projects.loanservice.entity.Loan;
+import com.projects.loanservice.exception.BookNotAvailableException;
 import com.projects.loanservice.exception.InvalidDueDateException;
 import com.projects.loanservice.exception.LoanNotFoundException;
 import com.projects.loanservice.mapper.BookMapper;
@@ -38,10 +39,13 @@ public class LoanServiceImpl implements LoanService {
             throw new InvalidDueDateException(loanRequest.getDueDate(), loanRequest.getLoanDate());
         }
 
-        // TODO: If the loan is not available don't process this operation
         Loan loan = LoanMapper.INSTANCE.loanRequestToLoan(loanRequest);
         Loan savedLoan = loanRepository.save(loan);
         BookResponse bookResponse = bookServiceClient.getBookById(savedLoan.getBookId());
+        if (!bookResponse.isAvailable()) {
+            throw new BookNotAvailableException(bookResponse.getId());
+        }
+
         bookResponse.setAvailable(false);
         BookRequest bookRequest = BookMapper.INSTANCE.bookResponseToBookRequest(bookResponse);
         bookServiceClient.updateBook(bookResponse.getId(), bookRequest);

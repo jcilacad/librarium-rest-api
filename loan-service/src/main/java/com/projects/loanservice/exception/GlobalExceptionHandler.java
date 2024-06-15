@@ -21,6 +21,16 @@ public class GlobalExceptionHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
+    @ExceptionHandler(BookNotAvailableException.class)
+    public ResponseEntity<ErrorDetails> handleBookNotAvailableException(BookNotAvailableException exception,
+                                                                        WebRequest webRequest) {
+        ErrorDetails errorDetails = new ErrorDetails();
+        errorDetails.setTimestamp(LocalDateTime.now());
+        errorDetails.setMessage(exception.getMessage());
+        errorDetails.setPath(webRequest.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(InvalidDueDateException.class)
     public ResponseEntity<ErrorDetails> handleInvalidDueDateException(InvalidDueDateException exception,
                                                                       WebRequest webRequest) {
