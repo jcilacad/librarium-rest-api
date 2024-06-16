@@ -1,14 +1,17 @@
 package com.projects.loanservice.service.impl;
 
 import com.projects.loanservice.client.BookServiceClient;
+import com.projects.loanservice.client.MemberServiceClient;
 import com.projects.loanservice.dto.request.BookRequest;
 import com.projects.loanservice.dto.request.LoanRequest;
 import com.projects.loanservice.dto.response.BookResponse;
 import com.projects.loanservice.dto.response.LoanResponse;
+import com.projects.loanservice.dto.response.MemberResponse;
 import com.projects.loanservice.entity.Loan;
 import com.projects.loanservice.exception.BookNotAvailableException;
 import com.projects.loanservice.exception.InvalidDueDateException;
 import com.projects.loanservice.exception.LoanNotFoundException;
+import com.projects.loanservice.exception.MemberNotFoundException;
 import com.projects.loanservice.mapper.BookMapper;
 import com.projects.loanservice.mapper.LoanMapper;
 import com.projects.loanservice.repository.LoanRepository;
@@ -31,6 +34,7 @@ public class LoanServiceImpl implements LoanService {
     private static final Logger logger = LoggerFactory.getLogger(LoanServiceImpl.class);
     private final LoanRepository loanRepository;
     private final BookServiceClient bookServiceClient;
+    private final MemberServiceClient memberServiceClient;
 
     @Override
     @Transactional
@@ -39,13 +43,19 @@ public class LoanServiceImpl implements LoanService {
             throw new InvalidDueDateException(loanRequest.getDueDate(), loanRequest.getLoanDate());
         }
 
-        Loan loan = LoanMapper.INSTANCE.loanRequestToLoan(loanRequest);
-        Loan savedLoan = loanRepository.save(loan);
-        BookResponse bookResponse = bookServiceClient.getBookById(savedLoan.getBookId());
+        BookResponse bookResponse = bookServiceClient.getBookById(loanRequest.getBookId());
         if (!bookResponse.isAvailable()) {
             throw new BookNotAvailableException(bookResponse.getId());
         }
 
+        try {
+            memberServiceClient.getMemberById(loanRequest.getMemberId());
+        } catch (Exception exception) {
+            throw new MemberNotFoundException(loanRequest.getMemberId());
+        }
+
+        Loan loan = LoanMapper.INSTANCE.loanRequestToLoan(loanRequest);
+        Loan savedLoan = loanRepository.save(loan);
         bookResponse.setAvailable(false);
         BookRequest bookRequest = BookMapper.INSTANCE.bookResponseToBookRequest(bookResponse);
         bookServiceClient.updateBook(bookResponse.getId(), bookRequest);
