@@ -6,7 +6,6 @@ import com.projects.loanservice.dto.request.BookRequest;
 import com.projects.loanservice.dto.request.LoanRequest;
 import com.projects.loanservice.dto.response.BookResponse;
 import com.projects.loanservice.dto.response.LoanResponse;
-import com.projects.loanservice.dto.response.MemberResponse;
 import com.projects.loanservice.entity.Loan;
 import com.projects.loanservice.exception.BookNotAvailableException;
 import com.projects.loanservice.exception.InvalidDueDateException;
@@ -16,6 +15,7 @@ import com.projects.loanservice.mapper.BookMapper;
 import com.projects.loanservice.mapper.LoanMapper;
 import com.projects.loanservice.repository.LoanRepository;
 import com.projects.loanservice.service.LoanService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,12 +38,43 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     @Transactional
+    @CircuitBreaker(name = "${spring.application.name}", fallbackMethod = "defaultCreateLoan")
     public LoanResponse createLoan(LoanRequest loanRequest) {
         if (loanRequest.getDueDate().isBefore(loanRequest.getLoanDate())) {
             throw new InvalidDueDateException(loanRequest.getDueDate(), loanRequest.getLoanDate());
         }
 
         BookResponse bookResponse = bookServiceClient.getBookById(loanRequest.getBookId());
+        if (!bookResponse.isAvailable()) {
+            throw new BookNotAvailableException(bookResponse.getId());
+        }
+
+        try {
+            memberServiceClient.getMemberById(loanRequest.getMemberId());
+        } catch (Exception exception) {
+            throw new MemberNotFoundException(loanRequest.getMemberId());
+        }
+
+        Loan loan = LoanMapper.INSTANCE.loanRequestToLoan(loanRequest);
+        Loan savedLoan = loanRepository.save(loan);
+        bookResponse.setAvailable(false);
+        BookRequest bookRequest = BookMapper.INSTANCE.bookResponseToBookRequest(bookResponse);
+        bookServiceClient.updateBook(bookResponse.getId(), bookRequest);
+        logger.info("Loan created successfully with id : {}", savedLoan.getId());
+        return LoanMapper.INSTANCE.loanToLoanResponse(savedLoan);
+    }
+
+    public LoanResponse defaultCreateLoan(LoanRequest loanRequest, Throwable throwable) {
+        if (loanRequest.getDueDate().isBefore(loanRequest.getLoanDate())) {
+            throw new InvalidDueDateException(loanRequest.getDueDate(), loanRequest.getLoanDate());
+        }
+
+        BookResponse bookResponse = new BookResponse();
+        bookResponse.setAvailable(true);
+        bookResponse.setTitle("Default Book Title");
+        bookResponse.setAuthor("Default Book Author");
+        bookResponse.setIsbn("Default Book ISBN");
+
         if (!bookResponse.isAvailable()) {
             throw new BookNotAvailableException(bookResponse.getId());
         }
