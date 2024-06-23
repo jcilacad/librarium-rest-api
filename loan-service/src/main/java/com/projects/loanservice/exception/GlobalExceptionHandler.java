@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
         errorDetails.setTimestamp(LocalDateTime.now());
         errorDetails.setMessage(exception.getMessage());
         errorDetails.setPath(webRequest.getDescription(false));
-        logger.error("Member not found exception : {}", exception.getStackTrace().toString());
+        logger.error("Member not found exception : ", exception);
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
@@ -39,7 +39,7 @@ public class GlobalExceptionHandler {
         errorDetails.setTimestamp(LocalDateTime.now());
         errorDetails.setMessage(exception.getMessage());
         errorDetails.setPath(webRequest.getDescription(false));
-        logger.error("Book not available exception : {}", exception.getStackTrace().toString());
+        logger.error("Book not available exception : ", exception);
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
@@ -50,7 +50,7 @@ public class GlobalExceptionHandler {
         errorDetails.setTimestamp(LocalDateTime.now());
         errorDetails.setMessage(exception.getMessage());
         errorDetails.setPath(webRequest.getDescription(false));
-        logger.error("Invalid due date exception : {}", exception.getStackTrace().toString());
+        logger.error("Invalid due date exception : ", exception);
         return new ResponseEntity<>(errorDetails,  HttpStatus.BAD_REQUEST);
     }
 
@@ -61,7 +61,7 @@ public class GlobalExceptionHandler {
         errorDetails.setTimestamp(LocalDateTime.now());
         errorDetails.setMessage(exception.getMessage());
         errorDetails.setPath(webRequest.getDescription(false));
-        logger.error("Loan not found exception : {}", exception.getStackTrace().toString());
+        logger.error("Loan not found exception : ", exception);
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
@@ -73,7 +73,7 @@ public class GlobalExceptionHandler {
                 .map(FieldError::getDefaultMessage)
                 .collect(Collectors.toList());
         errors.put("errors", errorMessages);
-        logger.error("Method argument not valid exception : {}", exception.getStackTrace().toString());
+        logger.error("Method argument not valid exception : ", exception);
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
@@ -83,7 +83,7 @@ public class GlobalExceptionHandler {
         errorDetails.setTimestamp(LocalDateTime.now());
         errorDetails.setMessage(exception.getMessage());
         errorDetails.setPath(webRequest.getDescription(false));
-        logger.error("Global exception : {}", exception.getStackTrace().toString());
+        logger.error("Global exception : ", exception);
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
