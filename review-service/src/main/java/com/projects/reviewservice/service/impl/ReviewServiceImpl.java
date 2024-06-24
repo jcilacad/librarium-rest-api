@@ -1,8 +1,12 @@
 package com.projects.reviewservice.service.impl;
 
+import com.projects.reviewservice.client.BookServiceClient;
+import com.projects.reviewservice.client.MemberServiceClient;
 import com.projects.reviewservice.dto.request.ReviewRequest;
 import com.projects.reviewservice.dto.response.ReviewResponse;
 import com.projects.reviewservice.entity.Review;
+import com.projects.reviewservice.exception.BookNotFoundException;
+import com.projects.reviewservice.exception.MemberNotFoundException;
 import com.projects.reviewservice.exception.ReviewNotFoundException;
 import com.projects.reviewservice.mapper.ReviewMapper;
 import com.projects.reviewservice.repository.ReviewRepository;
@@ -20,11 +24,22 @@ import java.util.stream.Collectors;
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
+    private final BookServiceClient bookServiceClient;
+    private final MemberServiceClient memberServiceClient;
 
     @Override
     public ReviewResponse addReview(ReviewRequest reviewRequest) {
         Review review = ReviewMapper.INSTANCE.reviewRequestToReview(reviewRequest);
-        // TODO: Create a logic to check if the book and member exits in the member and book services.
+        boolean existsById = bookServiceClient.existsById(review.getBookId());
+        if (!existsById) {
+            throw new BookNotFoundException(review.getBookId());
+        }
+
+        boolean existsByMemberId = memberServiceClient.existsById(review.getMemberId());
+        if (!existsByMemberId) {
+            throw new MemberNotFoundException(review.getMemberId());
+        }
+
         Review savedReview = reviewRepository.save(review);
         log.info("Review added successfully with id: {}", savedReview.getId());
         return ReviewMapper.INSTANCE.reviewToReviewResponse(savedReview);
@@ -60,7 +75,16 @@ public class ReviewServiceImpl implements ReviewService {
     public ReviewResponse updateReview(Long id, ReviewRequest reviewRequest) {
         Review review = reviewRepository.findById(id)
                 .orElseThrow(() -> new ReviewNotFoundException(id));
-        // TODO: Create a logic to check if the book and member exits in the member and book services.
+        boolean existsById = bookServiceClient.existsById(review.getBookId());
+        if (!existsById) {
+            throw new BookNotFoundException(review.getBookId());
+        }
+
+        boolean existsByMemberId = memberServiceClient.existsById(review.getMemberId());
+        if (!existsByMemberId) {
+            throw new MemberNotFoundException(review.getMemberId());
+        }
+
         log.info("Review found with id: {}", id);
         review.setBookId(reviewRequest.getBookId());
         review.setMemberId(reviewRequest.getMemberId());

@@ -16,4 +16,6 @@ public interface MemberService {
     MemberResponse updateMember(Long id, MemberRequest memberRequest);
 
     void deleteMember(Long id);
+
+    boolean existsById(Long id);
 }

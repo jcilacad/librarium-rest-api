@@ -44,4 +44,9 @@ public class MemberController {
         memberService.deleteMember(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/validate/{id}")
+    public ResponseEntity<Boolean> existsById(@PathVariable Long id) {
+        return ResponseEntity.ok(memberService.existsById(id));
+    }
 }

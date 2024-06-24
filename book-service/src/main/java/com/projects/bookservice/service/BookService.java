@@ -16,4 +16,6 @@ public interface BookService {
     BookResponse updateBook(Long id, BookRequest bookRequest);
 
     void deleteBook(Long id);
+
+    boolean existsById(Long id);
 }
