@@ -19,6 +19,28 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(BookNotFoundException.class)
+    public ResponseEntity<ErrorDetails> handleBookNotFoundException(BookNotFoundException exception,
+                                                                    WebRequest webRequest) {
+        ErrorDetails errorDetails = new ErrorDetails();
+        errorDetails.setTimestamp(Instant.now());
+        errorDetails.setMessage(exception.getMessage());
+        errorDetails.setPath(webRequest.getDescription(false));
+        log.error("Book not found exception : ", exception);
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(MemberNotFoundException.class)
+    public ResponseEntity<ErrorDetails> handleMemberNotFoundException(MemberNotFoundException exception,
+                                                                      WebRequest webRequest) {
+        ErrorDetails errorDetails = new ErrorDetails();
+        errorDetails.setTimestamp(Instant.now());
+        errorDetails.setMessage(exception.getMessage());
+        errorDetails.setPath(webRequest.getDescription(false));
+        log.error("Member not found exception : ", exception);
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(ReviewNotFoundException.class)
     public ResponseEntity<ErrorDetails> handleReviewNotFoundException(ReviewNotFoundException exception,
                                                                       WebRequest webRequest) {
