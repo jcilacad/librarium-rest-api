@@ -6,17 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="89826aae-dc47-4465-a064-dc53c6c955d7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/book-service/src/main/java/com/projects/bookservice/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/book-service/src/main/java/com/projects/bookservice/controller/BookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/book-service/src/main/java/com/projects/bookservice/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/book-service/src/main/java/com/projects/bookservice/service/BookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/book-service/src/main/java/com/projects/bookservice/service/impl/BookServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/book-service/src/main/java/com/projects/bookservice/service/impl/BookServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/member-service/src/main/java/com/projects/memberservice/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/member-service/src/main/java/com/projects/memberservice/controller/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/member-service/src/main/java/com/projects/memberservice/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/member-service/src/main/java/com/projects/memberservice/service/MemberService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/member-service/src/main/java/com/projects/memberservice/service/impl/MemberServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/member-service/src/main/java/com/projects/memberservice/service/impl/MemberServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/review-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/review-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/review-service/src/main/java/com/projects/reviewservice/ReviewServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/review-service/src/main/java/com/projects/reviewservice/ReviewServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/review-service/src/main/java/com/projects/reviewservice/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/review-service/src/main/java/com/projects/reviewservice/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/review-service/src/main/java/com/projects/reviewservice/exception/MemberNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/review-service/src/main/java/com/projects/reviewservice/exception/MemberNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/review-service/src/main/java/com/projects/reviewservice/service/impl/ReviewServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/review-service/src/main/java/com/projects/reviewservice/service/impl/ReviewServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/review-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/review-service/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,12 +68,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BookServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.projects.bookservice.BookServiceApplication" />
-      <module name="book-service" />
+    <configuration name="ConfigServerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.projects.configserver.ConfigServerApplication" />
+      <module name="config-server" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.projects.bookservice.*" />
+          <option name="PATTERN" value="com.projects.configserver.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -103,12 +94,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MemberServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.projects.memberservice.MemberServiceApplication" />
-      <module name="member-service" />
+    <configuration name="ReviewServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.projects.reviewservice.ReviewServiceApplication" />
+      <module name="review-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.projects.memberservice.*" />
+          <option name="PATTERN" value="com.projects.reviewservice.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -116,12 +107,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ReviewServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.projects.reviewservice.ReviewServiceApplication" />
-      <module name="review-service" />
+    <configuration name="ServiceRegistryApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.projects.serviceregistry.ServiceRegistryApplication" />
+      <module name="service-registry" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.projects.reviewservice.*" />
+          <option name="PATTERN" value="com.projects.serviceregistry.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -146,9 +137,9 @@
       <list>
         <item itemvalue="Application.ReviewServiceApplication" />
         <item itemvalue="Application.ApiGatewayApplication" />
+        <item itemvalue="Application.ConfigServerApplication" />
+        <item itemvalue="Application.ServiceRegistryApplication" />
         <item itemvalue="Application.LoanServiceApplication" />
-        <item itemvalue="Application.BookServiceApplication" />
-        <item itemvalue="Application.MemberServiceApplication" />
       </list>
     </recent_temporary>
   </component>
