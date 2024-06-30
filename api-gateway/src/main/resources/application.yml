@@ -20,6 +20,11 @@ spring:
         id: LOAN-SERVICE
         uri: lb://LOAN-SERVICE
         predicates[0]: Path=/api/v1/loans/**
+      # Review Service Routes
+      routes[3]:
+        id: REVIEW-SERVICE
+        uri: lb://REVIEW-SERVICE
+        predicates[0]: Path=/api/v1/reviews/**
   output:
     ansi:
       enabled: always
